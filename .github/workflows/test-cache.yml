@@ -3,25 +3,26 @@ name: Cache Test for SimpleSpec
 # This workflow will fail if "aqtinstall list-qt ... --spec ..." or its caller goes wrong.
 # Due to permission issues, this workflow should not run for PRs.
 
-on:
-  push:
-  workflow_dispatch:
-    inputs:
-      # The following input and its usage are based on the "rclone/rclone" project.
-      # https://github.com/rclone/rclone/blob/c1f5df209024c79028c98134b703b31d599befac/.github/workflows/build.yml#L24
-      # Copyright (C) 2012 by Nick Craig-Wood http://www.craig-wood.com/nick/. Licensed under MIT.
-      manual:
-        description: Manual run (bypass default conditions)
-        required: true
-        type: choice
-        default: 'TRUE'
-        options:
-          - 'TRUE'
-
-# The cache is global, so do not mess it up.
-# Read:
-# - Control the concurrency of workflows and jobs - GitHub Docs
-#   https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   push:
+#   workflow_dispatch:
+#     inputs:
+#       # The following input and its usage are based on the "rclone/rclone" project.
+#       # https://github.com/rclone/rclone/blob/c1f5df209024c79028c98134b703b31d599befac/.github/workflows/build.yml#L24
+#       # Copyright (C) 2012 by Nick Craig-Wood http://www.craig-wood.com/nick/. Licensed under MIT.
+#       manual:
+#         description: Manual run (bypass default conditions)
+#         required: true
+#         type: choice
+#         default: 'TRUE'
+#         options:
+#           - 'TRUE'
+# 
+# # The cache is global, so do not mess it up.
+# # Read:
+# # - Control the concurrency of workflows and jobs - GitHub Docs
+# #   https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency
 concurrency:
   group: iqta-spec-cache-test
 

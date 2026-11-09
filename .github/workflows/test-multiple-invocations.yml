@@ -3,22 +3,23 @@ name: Test outputs and environment across multiple invocations
 # You should NOT run this action multiple times in a single job in production like this workflow,
 # otherwise the resulting environment may become very chaotic.
 
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
-    inputs:
-      # The following input and its usage are based on the "rclone/rclone" project.
-      # https://github.com/rclone/rclone/blob/c1f5df209024c79028c98134b703b31d599befac/.github/workflows/build.yml#L24
-      # Copyright (C) 2012 by Nick Craig-Wood http://www.craig-wood.com/nick/. Licensed under MIT.
-      manual:
-        description: Manual run (bypass default conditions)
-        required: true
-        type: choice
-        default: 'TRUE'
-        options:
-          - 'TRUE'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   push:
+#   pull_request:
+#   workflow_dispatch:
+#     inputs:
+#       # The following input and its usage are based on the "rclone/rclone" project.
+#       # https://github.com/rclone/rclone/blob/c1f5df209024c79028c98134b703b31d599befac/.github/workflows/build.yml#L24
+#       # Copyright (C) 2012 by Nick Craig-Wood http://www.craig-wood.com/nick/. Licensed under MIT.
+#       manual:
+#         description: Manual run (bypass default conditions)
+#         required: true
+#         type: choice
+#         default: 'TRUE'
+#         options:
+#           - 'TRUE'
+# 
 jobs:
   test:
     name: Multiple invocations (${{ matrix.os }})

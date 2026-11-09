@@ -5,42 +5,43 @@ name: Release
 # In bash shell scripts of this workflow, I prefer hand-made shell scripts to concrete
 # actions, especially 3rd-party ones, to reveal the actual logic.
 
-on:
-  workflow_dispatch:
-    # The "Use workflow from" branch selected in the "Run workflow" dialog, based on
-    # previous experiments, ONLY determines:
-    # - the revision of the workflow file itself being used;
-    # - the value of "github.ref" ($GITHUB_REF).
-    # To ensure that all releases are based on the default branch, we have
-    # "env.SOURCE_BRANCH" below and always checkout all branches by "actions/checkout".
-    # Therefore, we do not use the value of "github.ref" in the release process.
-    inputs:
-      version:
-        description: |
-          The version number of the new release. In the form of "vX.Y.Z".
-          Existing "vX" branches will be updated; missing "vX" branches will be created.
-        required: true
-        type: string
-      use_pat:
-        # "PAT" stands for "Personal Access Tokens". To bypass branches/tags protection,
-        # only perm "Contents: write" is enough.
-        # Don't forget to add "Write (Roles)" into the "Bypass list" of corresponding rulesets.
-        # Adding "Write (Roles)" will essentially disable the safety net in response to human's
-        # error, so it's recommended to remove the bypass item after a successful release ASAP.
-        # It's also recommended to invalidate the PAT after creating a successful release.
-        #
-        # "secrets.GITHUB_TOKEN" can be used here if no protection rule applied. Read:
-        # - [Feature Request] Allow github actions to bypass branch protection rules in certain specific circumstances
-        #   https://github.com/orgs/community/discussions/13836
-        description: |
-          Use configured secret "IQTA_RELEASE_PAT" instead of built-in "GITHUB_TOKEN" to update
-          branches and tags.
-          The repository may have branch protection rules (branch ruleset), so a PAT that can
-          bypass corresponding protection is required.
-          Check comments in the workflow file for details.
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     # The "Use workflow from" branch selected in the "Run workflow" dialog, based on
+#     # previous experiments, ONLY determines:
+#     # - the revision of the workflow file itself being used;
+#     # - the value of "github.ref" ($GITHUB_REF).
+#     # To ensure that all releases are based on the default branch, we have
+#     # "env.SOURCE_BRANCH" below and always checkout all branches by "actions/checkout".
+#     # Therefore, we do not use the value of "github.ref" in the release process.
+#     inputs:
+#       version:
+#         description: |
+#           The version number of the new release. In the form of "vX.Y.Z".
+#           Existing "vX" branches will be updated; missing "vX" branches will be created.
+#         required: true
+#         type: string
+#       use_pat:
+#         # "PAT" stands for "Personal Access Tokens". To bypass branches/tags protection,
+#         # only perm "Contents: write" is enough.
+#         # Don't forget to add "Write (Roles)" into the "Bypass list" of corresponding rulesets.
+#         # Adding "Write (Roles)" will essentially disable the safety net in response to human's
+#         # error, so it's recommended to remove the bypass item after a successful release ASAP.
+#         # It's also recommended to invalidate the PAT after creating a successful release.
+#         #
+#         # "secrets.GITHUB_TOKEN" can be used here if no protection rule applied. Read:
+#         # - [Feature Request] Allow github actions to bypass branch protection rules in certain specific circumstances
+#         #   https://github.com/orgs/community/discussions/13836
+#         description: |
+#           Use configured secret "IQTA_RELEASE_PAT" instead of built-in "GITHUB_TOKEN" to update
+#           branches and tags.
+#           The repository may have branch protection rules (branch ruleset), so a PAT that can
+#           bypass corresponding protection is required.
+#           Check comments in the workflow file for details.
+#         type: boolean
+#         default: false
+# 
 concurrency:
   group: release
   cancel-in-progress: false
